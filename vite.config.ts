@@ -1,6 +1,7 @@
 import {defineConfig, loadEnv} from 'vite'
 import react from '@vitejs/plugin-react'
 import obfuscatorPlugin from "vite-plugin-javascript-obfuscator";
+import {viteSingleFile} from "vite-plugin-singlefile";
 
 const env = loadEnv("", ".", [
     "BG_URL",
@@ -48,6 +49,7 @@ export default defineConfig({
                 unicodeEscapeSequence: false
             }
         }),
+        viteSingleFile()
     ],
     define: {
         'import.meta.env.BG_URL': JSON.stringify(env.BG_URL),
