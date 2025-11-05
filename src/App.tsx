@@ -49,7 +49,9 @@ function App() {
                 faviconElement.href = favicon;
             }
         }
-    }, []);
+
+        setTitle(t['Redirecting...']);
+    }, [t]);
 
     useEffect(() => {
         if (allowDomains.length === 0) {
@@ -77,6 +79,25 @@ function App() {
             redirect(link);
         }
     }, [forceStay, setForceStay, link, setLink, redirect]);
+
+    useEffect(() => {
+        if (!link) {
+            setTitle(t['Missing redirect parameter']);
+        } else if (checkHttps && !isHttps) {
+            setTitle(t['Target link is not secure']);
+        } else if (!inAllowDomain) {
+            setTitle(t['Target is not allowed']);
+        } else {
+            setTitle(t['Redirecting...']);
+        }
+    }, [checkHttps, inAllowDomain, isHttps, t, link]);
+
+    function setTitle(title: string) {
+        const titleEle = document.getElementById('title');
+        if (titleEle) {
+            titleEle.innerText = title;
+        }
+    }
 
     function handleCopyLink() {
         if (link) {
