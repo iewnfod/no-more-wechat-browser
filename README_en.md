@@ -1,5 +1,5 @@
 <h1 align="center">No More Wechat Browser</h1>
-<p align="center">A lightweight page to prevent you website load in Wechat browser.</p>
+<p align="center">A lightweight page to prevent you website load in Wechat browser</p>
 <p align="center">
 <a href="./README.md">中文</a> | English
 </p>

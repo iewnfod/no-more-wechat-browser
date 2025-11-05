@@ -1,5 +1,5 @@
 <h1 align="center">No More Wechat Browser</h1>
-<p align="center">一个轻量级的网页来避免你的网站被微信直接加载</p>
+<p align="center">一个轻量级的网页来避免你的网站在微信浏览器中加载</p>
 <p align="center">
 中文 | <a href="./README_en.md">English</a>
 </p>
@@ -8,7 +8,7 @@
 
 ## 展示
 将此网站部署在你发送给用户的网页服务前，或使用 Cloudflare Redirect Rules 来自动转发。
-它会组织用户直接在微信浏览器中打开它而是显示以下页面，而在普通浏览器中打开此页面会自动转跳到目标地址。
+它会阻止用户直接在微信浏览器中打开它而是显示以下页面，而在普通浏览器中打开此页面会自动转跳到目标地址。
 ![show](img/show_zh.png)
 
 ## 环境变量
