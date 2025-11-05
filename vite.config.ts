@@ -5,7 +5,8 @@ const env = loadEnv("", ".", [
     "BG_URL",
     "CHECK_HTTPS",
     "ALLOW_DOMAINS",
-    "SHOW_GITHUB"
+    "SHOW_GITHUB",
+    "FAVICON_URL"
 ]);
 
 // https://vite.dev/config/
@@ -15,6 +16,7 @@ export default defineConfig({
         'import.meta.env.BG_URL': JSON.stringify(env.BG_URL),
         'import.meta.env.CHECK_HTTPS': JSON.stringify(env.CHECK_HTTPS),
         'import.meta.env.ALLOW_DOMAINS': JSON.stringify(env.ALLOW_DOMAINS),
-        'import.meta.env.SHOW_GITHUB': JSON.stringify(env.SHOW_GITHUB)
+        'import.meta.env.SHOW_GITHUB': JSON.stringify(env.SHOW_GITHUB),
+        'import.meta.env.FAVICON_URL': JSON.stringify(env.FAVICON_URL),
     }
 });

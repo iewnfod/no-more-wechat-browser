@@ -16,7 +16,8 @@ const translation: Dictionary<Dictionary<string>> = {
         "Not allowed target domain": "不允许的目标域名",
         "Only allow redirecting to managed domains and subdomains": "仅允许重定向到受管理的域名及其子域",
         "Missing redirect parameter": "缺少重定向参数",
-        "Cannot find target link": "找不到目标地址"
+        "Cannot find target link": "找不到目标地址",
+        "You are in force stay mode now, which means that it will never redirect to target link and you can make test on it.": "你现在处于强制停留状态，这表示你将不会被从这个页面重定向到目标地址，你可以在此处进行调试"
     },
     'en-us': {
         'Please open in browser': "Please open in browser",
@@ -31,7 +32,8 @@ const translation: Dictionary<Dictionary<string>> = {
         "Not allowed target domain": "Not allowed target domain",
         "Only allow redirecting to managed domains and subdomains": "Only allow redirecting to managed domains and subdomains",
         "Missing redirect parameter": "Missing redirect parameter",
-        "Cannot find target link": "Cannot find target link"
+        "Cannot find target link": "Cannot find target link",
+        "You are in force stay mode now, which means that it will never redirect to target link and you can make test on it.": "You are in force stay mode now, which means that it will never redirect to target link and you can make test on it."
     }
 }
 

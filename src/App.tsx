@@ -1,4 +1,3 @@
-import './App.css';
 import {Fragment, useEffect, useState} from "react";
 import {Button, Card, CardActions, CardContent, CardMedia, Stack, Typography} from "@mui/material";
 import {toast, ToastContainer} from "react-toastify";
@@ -14,6 +13,7 @@ function App() {
     const [allowDomains, setAllowDomains] = useState<string[]>([]);
     const [inAllowDomain, setInAllowDomain] = useState<boolean>(false);
     const [showGithub, setShowGithub] = useState<boolean>(true);
+    const [forceStay, setForceStay] = useState<boolean>(false);
 
     useEffect(() => {
         const searchParams = new URLSearchParams(window.location.search);
@@ -24,6 +24,10 @@ function App() {
         const lang = searchParams.get("lang");
         if (lang) {
             setLang(lang);
+        }
+        const force = searchParams.get("force");
+        if (force) {
+            setForceStay(force === "true");
         }
 
         if (import.meta.env.CHECK_HTTPS) {
@@ -36,6 +40,14 @@ function App() {
             setAllowDomains(import.meta.env.ALLOW_DOMAINS.trim().split(','));
         } else {
             setAllowDomains([]);
+        }
+        if (import.meta.env.FAVICON_URL) {
+            const favicon = import.meta.env.FAVICON_URL;
+            const faviconElement = document.getElementById('favicon-link');
+            if (faviconElement) {
+                // @ts-expect-error favicon has href
+                faviconElement.href = favicon;
+            }
         }
     }, []);
 
@@ -58,11 +70,13 @@ function App() {
 
     useEffect(() => {
         setIsHttps(link?.protocol === "https:");
+    }, [link, setLink]);
 
-        if (!isWechatBrowser() && link) {
+    useEffect(() => {
+        if (!isWechatBrowser() && link && !forceStay) {
             window.location.replace(link);
         }
-    }, [link, setLink]);
+    }, [forceStay, setForceStay, link, setLink]);
 
     function handleCopyLink() {
         if (link) {
@@ -99,7 +113,7 @@ function App() {
                                         <Typography gutterBottom variant="h5" component="div">
                                             {t['Not allowed protocol']}
                                         </Typography>
-                                        <Typography variant="body2" sx={{ color: 'text.secondary', pr: 2 }}>
+                                        <Typography variant="body2" sx={{ color: 'text.secondary', pr: 4 }}>
                                             {t['Target link must use HTTPS']}
                                         </Typography>
                                     </Stack>
@@ -114,11 +128,11 @@ function App() {
                                             <Typography gutterBottom variant="h5" component="div">
                                                 {t['Please open in browser']}
                                             </Typography>
-                                            <Typography variant="body2" sx={{ color: 'text.secondary', pr: 2 }}>
+                                            <Typography variant="body2" sx={{ color: 'text.secondary', pr: 4 }}>
                                                 {t['Currently not support view in Wechat. Please click more on top right corner and select `open in default browser`.']}
                                             </Typography>
                                             <Typography variant="subtitle1" sx={{
-                                                color: 'text.secondary', pr: 2, textOverflow: 'ellipsis', overflow: 'hidden',
+                                                color: 'text.secondary', textOverflow: 'ellipsis', overflow: 'hidden',
                                                 width: '90%', whiteSpace: 'nowrap'
                                             }}>
                                                 <a href={link.toString()}>
@@ -141,7 +155,7 @@ function App() {
                                             <Typography gutterBottom variant="h5" component="div">
                                                 {t['Not allowed target domain']}
                                             </Typography>
-                                            <Typography variant="body2" sx={{ color: 'text.secondary', pr: 2 }}>
+                                            <Typography variant="body2" sx={{ color: 'text.secondary', pr: 4 }}>
                                                 {t['Only allow redirecting to managed domains and subdomains']}
                                             </Typography>
                                         </Stack>
@@ -157,7 +171,7 @@ function App() {
                                     <Typography gutterBottom variant="h5" component="div">
                                         {t['Missing redirect parameter']}
                                     </Typography>
-                                    <Typography variant="body2" sx={{ color: 'text.secondary', pr: 2 }}>
+                                    <Typography variant="body2" sx={{ color: 'text.secondary', pr: 4 }}>
                                         {t['Cannot find target link']}
                                     </Typography>
                                 </Stack>
@@ -171,6 +185,15 @@ function App() {
                     <Stack sx={{position: 'absolute', bottom: 15}}>
                         <Typography variant="body2" component="p" color="textSecondary">
                             {t['powered by front']} <a href="https://github.com/iewnfod/no-more-wechat-browser" target="_blank">no-more-wechat-browser</a> {t['powered by end']}
+                        </Typography>
+                    </Stack>
+                ) : null
+            }
+            {
+                forceStay ? (
+                    <Stack sx={{position: 'absolute', top: 15}}>
+                        <Typography variant="body2" component="p" color="error">
+                            {t['You are in force stay mode now, which means that it will never redirect to target link and you can make test on it.']}
                         </Typography>
                     </Stack>
                 ) : null
