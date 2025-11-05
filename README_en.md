@@ -14,7 +14,7 @@ It will prevent users to open your website directly in Wechat browser and show f
 ## Environment Vairables
 | Environment Vairable | Description                                                                 | Default |
 |----------------------|-----------------------------------------------------------------------------|---------|
-| BG_URL               | Background image URL                                                        |         |
+| BG_URL               | Background image URL (recommend length-width ratio 69 : 28)                 |         |
 | CHECK_HTTPS          | Check if target link is using https                                         | false   |
 | ALLOW_DOMAINS        | Allowed domains for link (empty for all, use ',' to split multiple domains) | all     |
 | SHOW_GITHUB          | Show project link at bottom                                                 | true    |
