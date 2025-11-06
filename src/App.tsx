@@ -118,7 +118,7 @@ function App() {
 
     function isWechatBrowser() {
         const ua = navigator.userAgent || '';
-        return /MicroMessenger/i.test(ua);
+        return /MicroMessenger/i.test(ua) || /XWEB/i.test(ua) || /MMWEBSDK/i.test(ua);
     }
 
     return (
