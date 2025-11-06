@@ -14,6 +14,7 @@ function App() {
     const [inAllowDomain, setInAllowDomain] = useState<boolean>(false);
     const [showGithub, setShowGithub] = useState<boolean>(true);
     const [forceStay, setForceStay] = useState<boolean>(false);
+    const [bgUrl, setBgUrl] = useState<string>("https://picsum.photos/345/140?random=1");
 
     useEffect(() => {
         const searchParams = new URLSearchParams(window.location.search);
@@ -48,6 +49,9 @@ function App() {
                 // @ts-expect-error favicon has href
                 faviconElement.href = favicon;
             }
+        }
+        if (import.meta.env.BG_URL) {
+            setBgUrl(import.meta.env.BG_URL);
         }
 
         setTitle(t['Redirecting...']);
@@ -128,7 +132,7 @@ function App() {
                     component="img"
                     alt=""
                     height="140"
-                    image={import.meta.env.BG_URL}
+                    image={bgUrl}
                     sx={{userSelect: 'none'}}
                 />
                 {

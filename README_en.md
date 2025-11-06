@@ -28,13 +28,13 @@ It will prevent users to open your website directly in WeChat browser and show f
 
 ## Environment Variables
 
-| Environment Variable | Description                                                                 | Default |
-|----------------------|-----------------------------------------------------------------------------|---------|
-| BG_URL               | Background image URL (recommend length-width ratio 69 : 28)                 |         |
-| CHECK_HTTPS          | Check if target link is using https                                         | false   |
-| ALLOW_DOMAINS        | Allowed domains for link (empty for all, use ',' to split multiple domains) | all     |
-| SHOW_GITHUB          | Show project link at bottom                                                 | true    |
-| FAVICON_URL          | Website favicon URL                                                         |         |
+| Environment Variable | Description                                                                 | Default        |
+|----------------------|-----------------------------------------------------------------------------|----------------|
+| BG_URL               | Background image URL (recommend length-width ratio 69 : 28)                 | Random Picture |
+| CHECK_HTTPS          | Check if target link is using https                                         | false          |
+| ALLOW_DOMAINS        | Allowed domains for link (empty for all, use ',' to split multiple domains) | all            |
+| SHOW_GITHUB          | Show project link at bottom                                                 | true           |
+| FAVICON_URL          | Website favicon URL                                                         |                |
 
 ## Cloudflare Redirect Rules Example
 Match Expression:
@@ -72,6 +72,7 @@ concat("https://PAGES_DOMAIN/?link=", http.request.full_uri)
 * [Typescript](https://www.typescriptlang.org/)
 * [MUI](https://mui.com/)
 * [pnpm](https://pnpm.io/)
+* [Lorem Picsum](https://picsum.photos/)
 
 ## License
 

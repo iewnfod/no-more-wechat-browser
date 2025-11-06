@@ -30,7 +30,7 @@
 
 | 环境变量          | 描述                             | 默认值   |
 |---------------|--------------------------------|-------|
-| BG_URL        | 背景图片网址 (推荐长宽比 69 : 28)         |       |
+| BG_URL        | 背景图片网址 (推荐长宽比 69 : 28)         | 随机照片  |
 | CHECK_HTTPS   | 是否检查目标地址使用 https 协议            | false |
 | ALLOW_DOMAINS | 受允许的目标域名，留空为允许所有，使用 ',' 分割多个域名 | 允许所有  |
 | SHOW_GITHUB   | 展示底部的项目 Github 链接              | true  |
@@ -51,11 +51,11 @@ concat("https://PAGES_DOMAIN/?link=", http.request.full_uri)
 
 ## URL 参数
 
-| 参数     | 描述 | 默认值 |
-|--------| --- | ----- |
-| link   | 目标地址 | |
-| lang   | 显示语言 | 浏览器默认语言 |
-| force | 强制在非微信浏览器中不转跳 | false |
+| 参数     | 描述            | 默认值     |
+|--------|---------------|---------|
+| link   | 目标地址          |         |
+| lang   | 显示语言          | 浏览器默认语言 |
+| force  | 强制在非微信浏览器中不转跳 | false   |
 
 > 注意：参数 `force` 理论上只应该在开发环境中使。
 
@@ -72,6 +72,7 @@ concat("https://PAGES_DOMAIN/?link=", http.request.full_uri)
 * [Typescript](https://www.typescriptlang.org/)
 * [MUI](https://mui.com/)
 * [pnpm](https://pnpm.io/)
+* [Lorem Picsum](https://picsum.photos/)
 
 ## License
 
