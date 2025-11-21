@@ -31,10 +31,11 @@ It will prevent users to open your website directly in WeChat browser and show f
 | Environment Variable | Description                                                                 | Default        |
 |----------------------|-----------------------------------------------------------------------------|----------------|
 | BG_URL               | Background image URL (recommend length-width ratio 69 : 28)                 | Random Picture |
-| CHECK_HTTPS          | Check if target link is using https                                         | false          |
+| CHECK_HTTPS          | Check if target link is using HTTPS                                         | false          |
 | ALLOW_DOMAINS        | Allowed domains for link (empty for all, use ',' to split multiple domains) | all            |
 | SHOW_GITHUB          | Show project link at bottom                                                 | true           |
 | FAVICON_URL          | Website favicon URL                                                         |                |
+| HTTPS_AUTO_UPGRADE   | Automatically upgrade HTTP protocol to HTTPS                                | false          |
 
 ## Cloudflare Redirect Rules Example
 Match Expression:

@@ -23,6 +23,7 @@ function App() {
     const [forceStay, setForceStay] = useState<boolean>(false);
     const [bgUrl, setBgUrl] = useState<string>("https://picsum.photos/345/140?random=1");
     const [invalidUrl, setInvalidUrl] = useState<boolean>(false);
+    const [autoHttpsUpgrade, setAutoHttpsUpgrade] = useState<boolean>(false);
 
     useEffect(() => {
         const searchParams = new URLSearchParams(window.location.search);
@@ -63,6 +64,9 @@ function App() {
             setAllowDomains(import.meta.env.ALLOW_DOMAINS.trim().split(','));
         } else {
             setAllowDomains([]);
+        }
+        if (import.meta.env.HTTPS_AUTO_UPGRADE) {
+            setAutoHttpsUpgrade(import.meta.env.HTTPS_AUTO_UPGRADE === "true");
         }
         if (import.meta.env.FAVICON_URL) {
             const favicon = import.meta.env.FAVICON_URL;
@@ -105,6 +109,22 @@ function App() {
             redirect(link);
         }
     }, [forceStay, setForceStay, link, setLink, redirect]);
+
+    useEffect(() => {
+        if (autoHttpsUpgrade) {
+            if (link?.protocol === "http:") {
+                setLink(prevL => {
+                    if (prevL) {
+                        const newL = new URL(prevL);
+                        newL.protocol = "https:";
+                        return newL;
+                    } else {
+                        return null;
+                    }
+                });
+            }
+        }
+    }, [autoHttpsUpgrade, link]);
 
     useEffect(() => {
         if (!link) {

@@ -31,10 +31,11 @@
 | 环境变量          | 描述                             | 默认值   |
 |---------------|--------------------------------|-------|
 | BG_URL        | 背景图片网址 (推荐长宽比 69 : 28)         | 随机照片  |
-| CHECK_HTTPS   | 是否检查目标地址使用 https 协议            | false |
+| CHECK_HTTPS   | 是否检查目标地址使用 HTTPS 协议            | false |
 | ALLOW_DOMAINS | 受允许的目标域名，留空为允许所有，使用 ',' 分割多个域名 | 允许所有  |
 | SHOW_GITHUB   | 展示底部的项目 Github 链接              | true  |
 | FAVICON_URL   | 网页图标地址                         |       |
+| HTTPS_AUTO_UPGRADE | HTTP 协议自动升级为 HTTPS        | false |
 
 ## Cloudflare Redirect Rules 示例
 
