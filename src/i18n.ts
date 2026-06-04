@@ -22,7 +22,9 @@ const translation: Dictionary<Dictionary<string>> = {
         "Target is not allowed": "目标地址不被允许",
         "Invalid URL": "错误的链接",
         "There might be something wrong in target link": "目标地址不合理或存在错误",
-        "You are in force stay mode now, which means that it will never redirect to target link and you can make test on it.": "你现在处于强制停留状态，这表示你将不会被从这个页面重定向到目标地址，你可以在此处进行调试"
+        "You are in force stay mode now, which means that it will never redirect to target link and you can make test on it.": "你现在处于强制停留状态，这表示你将不会被从这个页面重定向到目标地址，你可以在此处进行调试",
+        "Allow redirect to target link since the link is exempted.": "允许进行重定向因为目标地址被豁免了",
+        "Allow redirect to target link since this is not wechat browser.": "允许进行重定向因为当前不在微信浏览器中"
     },
     'en-us': {
         'Please open in browser': "Please open in browser",
@@ -43,7 +45,9 @@ const translation: Dictionary<Dictionary<string>> = {
         "Target is not allowed": "Target is not allowed",
         "Invalid URL": "Invalid URL",
         "There might be something wrong in target link": "There might be something wrong in target link",
-        "You are in force stay mode now, which means that it will never redirect to target link and you can make test on it.": "You are in force stay mode now, which means that it will never redirect to target link and you can make test on it."
+        "You are in force stay mode now, which means that it will never redirect to target link and you can make test on it.": "You are in force stay mode now, which means that it will never redirect to target link and you can make test on it.",
+        "Allow redirect to target link since the link is exempted.": "Allow redirect to target link since the link is exempted.",
+        "Allow redirect to target link since this is not wechat browser.": "Allow redirect to target link since this is not wechat browser."
     }
 }
 

@@ -1,4 +1,4 @@
-import {Fragment, useEffect, useState} from "react";
+import {Fragment, useCallback, useEffect, useMemo, useState} from "react";
 import {Card, CardMedia, Stack} from "@mui/material";
 import {ToastContainer} from "react-toastify";
 import {useTranslation} from "./i18n.ts";
@@ -18,12 +18,16 @@ function App() {
     const [isHttps, setIsHttps] = useState<boolean>(false);
     const [checkHttps, setCheckHttps] = useState<boolean>(false);
     const [allowDomains, setAllowDomains] = useState<string[]>([]);
+    const [exceptDomains, setExceptDomains] = useState<string[]>([]);
     const [inAllowDomain, setInAllowDomain] = useState<boolean>(false);
     const [showGithub, setShowGithub] = useState<boolean>(true);
     const [forceStay, setForceStay] = useState<boolean>(false);
     const [bgUrl, setBgUrl] = useState<string>("https://picsum.photos/345/140?random=1");
     const [invalidUrl, setInvalidUrl] = useState<boolean>(false);
     const [autoHttpsUpgrade, setAutoHttpsUpgrade] = useState<boolean>(false);
+    const [bypassReason, setBypassReason] = useState<string[]>([]);
+
+    const excepted = useMemo(() => link ? exceptDomains.includes(link.hostname) : false, [link, exceptDomains]);
 
     useEffect(() => {
         const searchParams = new URLSearchParams(window.location.search);
@@ -79,6 +83,9 @@ function App() {
         if (import.meta.env.BG_URL) {
             setBgUrl(import.meta.env.BG_URL);
         }
+        if (import.meta.env.EXEMPTED_DOMAINS) {
+            setExceptDomains(import.meta.env.EXEMPTED_DOMAINS.trim().split(','));
+        }
 
         setTitle(t['Redirecting...']);
     }, [t]);
@@ -103,12 +110,6 @@ function App() {
     useEffect(() => {
         setIsHttps(link?.protocol === "https:");
     }, [link, setLink]);
-
-    useEffect(() => {
-        if (!isWechatBrowser() && link && !forceStay) {
-            redirect(link);
-        }
-    }, [forceStay, setForceStay, link, setLink, redirect]);
 
     useEffect(() => {
         if (autoHttpsUpgrade) {
@@ -147,17 +148,48 @@ function App() {
         }
     }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    function redirect(url: URL) {
-        if ((checkHttps && isHttps || !checkHttps) && inAllowDomain && !invalidUrl) {
+    const redirect = useCallback((url: URL) => {
+        if ((checkHttps && isHttps || !checkHttps) && inAllowDomain && !invalidUrl || excepted) {
             window.location.replace(url);
         }
-    }
+    }, [checkHttps, isHttps, inAllowDomain, invalidUrl, excepted]);
 
     function isWechatBrowser() {
         const ua = navigator.userAgent || '';
         return /MicroMessenger/i.test(ua) || /XWEB/i.test(ua) || /MMWEBSDK/i.test(ua);
     }
+
+    function addBypassReason(reason: string) {
+        setBypassReason((prevState) => {
+            if (prevState.includes(reason)) {
+                return prevState;
+            } else {
+                return [
+                    ...prevState,
+                    reason,
+                ];
+            }
+        });
+    }
+
+    useEffect(() => {
+        if (link) {
+            if (excepted) {
+                if (forceStay) {
+                    addBypassReason(t['Allow redirect to target link since the link is exempted.']);
+                } else {
+                    redirect(link);
+                }
+            }
+            if (!isWechatBrowser()) {
+                if (forceStay) {
+                    addBypassReason(t['Allow redirect to target link since this is not wechat browser.']);
+                } else {
+                    redirect(link);
+                }
+            }
+        }
+    }, [setForceStay, link, setLink, redirect, excepted, forceStay, t]);
 
     return (
         <Stack sx={{width: '100%', height: '100%'}} justifyContent="center" alignItems="center">
@@ -211,7 +243,7 @@ function App() {
             }
             {
                 forceStay ? (
-                    <TopForceStay lang={lang}/>
+                    <TopForceStay lang={lang} reasons={bypassReason}/>
                 ) : null
             }
             <ToastContainer/>

@@ -9,7 +9,8 @@ const env = loadEnv("", ".", [
     "ALLOW_DOMAINS",
     "SHOW_GITHUB",
     "FAVICON_URL",
-    "HTTPS_AUTO_UPGRADE"
+    "HTTPS_AUTO_UPGRADE",
+    "EXEMPTED_DOMAINS"
 ]);
 
 // https://vite.dev/config/
@@ -59,5 +60,6 @@ export default defineConfig({
         'import.meta.env.SHOW_GITHUB': JSON.stringify(env.SHOW_GITHUB),
         'import.meta.env.FAVICON_URL': JSON.stringify(env.FAVICON_URL),
         'import.meta.env.HTTPS_AUTO_UPGRADE': JSON.stringify(env.HTTPS_AUTO_UPGRADE),
+        'import.meta.env.EXEMPTED_DOMAINS': JSON.stringify(env.EXEMPTED_DOMAINS),
     }
 });
